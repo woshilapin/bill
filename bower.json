@@ -1,0 +1,25 @@
+{
+  "name": "bill",
+  "description": "Share the bills with your friends",
+  "version": "0.1",
+  "keywords": [
+    "bill"
+  ],
+  "author": {
+    "name": "woshilapin",
+    "email": "woshilapin@gmail.com"
+  },
+  "homepage": "https://github.com/woshilapin/bill",
+  "license": "GPL-3.0+",
+  "private": "true",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.x",
+    "brick": "1.0.x",
+    "brick-common": "0.1.x"
+  }
+}
