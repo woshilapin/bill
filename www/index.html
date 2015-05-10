@@ -15,7 +15,7 @@
         <title>Bill</title>
     </head>
     <body>
-        <!--brick-tabbar>
+        <brick-tabbar>
             <brick-tabbar-tab target="peoples">
                 <i class="fa fa-users"></i>
                 Peoples
@@ -24,19 +24,19 @@
                 <i class="fa fa-shopping-cart"></i>
                 Purchases
             </brick-tabbar-tab>
-            <brick-tabbar-tab target="bill-it">
+            <brick-tabbar-tab target="share-it">
                 <i class="fa fa-euro"></i>
                 Share it!
             </brick-tabbar-tab>
-        </brick-tabbar-->
+        </brick-tabbar>
         <brick-deck id="content" selected-index="0">
-            <brick-card selected>
+            <brick-card id="peoples" selected>
                 <h1>Peoples</h1>
             </brick-card>
-            <brick-card>
+            <brick-card id="purchases">
                 <h1>Purchases</h1>
             </brick-card>
-            <brick-card>
+            <brick-card id="share-it">
                 <h1>Share it!</h1>
             </brick-card>
         </brick-deck>
