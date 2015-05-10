@@ -33,19 +33,16 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        console.log('Application "bill" started');
+        app.content = document.getElementById('content');
+        app.content.loop = true;
+        app.content.addEventListener('touchstart', app.nextCard);
     },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+    nextCard: function() {
+        app.content.nextCard();
     }
 };
 
-app.initialize();
+window.onload = function() {
+    app.initialize();   
+}
