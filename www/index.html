@@ -15,7 +15,7 @@
         <title>Bill</title>
     </head>
     <body>
-        <brick-tabbar>
+        <brick-tabbar id="menu">
             <brick-tabbar-tab target="peoples">
                 <i class="fa fa-users"></i>
                 Peoples
@@ -29,7 +29,7 @@
                 Share it!
             </brick-tabbar-tab>
         </brick-tabbar>
-        <brick-deck id="content" selected-index="0">
+        <brick-deck id="content" loop="false" selected-index="0">
             <brick-card id="peoples" selected>
                 <h1>Peoples</h1>
             </brick-card>
