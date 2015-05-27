@@ -13,6 +13,7 @@
 	"license": "GPL-3.0+",
 	"private": "true",
 	"dependencies": {
+		"angular": "1.4.x",
 		"bootstrap": "3.3.x",
 		"brick": "1.0.x",
 		"brick-tabbar": "https://github.com/mozbrick/brick-tabbar.git",

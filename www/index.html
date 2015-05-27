@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="BillApp">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -8,9 +8,14 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 
+        <link rel="stylesheet" type="text/css" href="css/bower/bootstrap/dist/css/bootstrap.css" />
+
         <script src="css/bower/platform/platform.js"></script>
         <link rel="import" href="css/bower/brick-tabbar/dist/brick-tabbar.html">
         <link rel="import" href="css/bower/brick-deck/dist/brick-deck.html">
+        
+        <script src="css/bower/angular/angular.js"></script>
+        <script src="js/peopleListController.js"></script>
 
         <title>Bill</title>
     </head>
@@ -31,7 +36,38 @@
         </brick-tabbar>
         <brick-deck id="content" loop="false" selected-index="0">
             <brick-card id="peoples" selected>
-                <h1>Peoples</h1>
+                <div data-ng-controller="PeopleListController as peopleList">
+                    <!--ul class="unstyled">
+                        <li data-ng-repeat="people in peopleList.peoples">
+                            {{people.name}}
+                        </li>
+                    </ul>
+                    <form data-ng-submit="peopleList.addPeople()">
+                        <input type="text" data-ng-model="peopleList.peopleName" placeholder="Put a new people here" />
+                        <input type="submit" value="Add" />
+                    </form-->
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr data-ng-repeat="people in peopleList.peoples">
+                                <td>
+                                    <form data-ng-submit="peopleList.removePeople($index)">
+                                        
+                                        <button type="submit" class="btn btn-danger">-</button>
+                                        {{people.name}}
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form data-ng-submit="peopleList.addPeople()">
+                                        <input type="text" class="form-control" data-ng-model="peopleList.peopleName" placeholder="Put a new people here" />
+                                        <button type="submit" class="btn btn-success form-control">Add</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </brick-card>
             <brick-card id="purchases">
                 <h1>Purchases</h1>
