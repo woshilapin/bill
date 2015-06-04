@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="BillApp">
+<html>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -15,11 +15,13 @@
         <link rel="import" href="bower/brick-deck/dist/brick-deck.html">
         
         <script src="bower/angular/angular.js"></script>
-        <script src="js/peopleListController.js"></script>
+        <script src="js/mainController.js"></script>
+        <!--script src="js/peopleListController.js"></script>
+        <!--script src="js/purchaseListController.js"></script-->
 
         <title>Bill</title>
     </head>
-    <body>
+    <body data-ng-app="BillApp">
         <brick-tabbar id="menu">
             <brick-tabbar-tab target="peoples">
                 <i class="fa fa-users"></i>
@@ -34,34 +36,28 @@
                 Share it!
             </brick-tabbar-tab>
         </brick-tabbar>
-        <brick-deck id="content" loop="false" selected-index="0">
+        <brick-deck id="content" loop="false" selected-index="0" data-ng-controller="MainController">
             <brick-card id="peoples" selected>
-                <div data-ng-controller="PeopleListController as peopleList">
-                    <!--ul class="unstyled">
-                        <li data-ng-repeat="people in peopleList.peoples">
-                            {{people.name}}
-                        </li>
-                    </ul>
-                    <form data-ng-submit="peopleList.addPeople()">
-                        <input type="text" data-ng-model="peopleList.peopleName" placeholder="Put a new people here" />
-                        <input type="submit" value="Add" />
-                    </form-->
+                <div>
                     <table class="table table-striped">
                         <tbody>
-                            <tr data-ng-repeat="people in peopleList.peoples">
+                            <tr data-ng-repeat="people in peoples">
                                 <td>
-                                    <form data-ng-submit="peopleList.removePeople($index)">
-                                        
-                                        <button type="submit" class="btn btn-danger">-</button>
+                                    <form data-ng-submit="removePeople($index)">
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-minus"></i></button>
                                         {{people.name}}
                                     </form>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <form data-ng-submit="peopleList.addPeople()">
-                                        <input type="text" class="form-control" data-ng-model="peopleList.peopleName" placeholder="Put a new people here" />
-                                        <button type="submit" class="btn btn-success form-control">Add</button>
+                                    <form data-ng-submit="addPeople()">
+                                        <div class="input-group">
+                                            <div class="input-group-btn">
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control" data-ng-model="peoples._newPeopleName" placeholder="Put a new people here" />
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
@@ -70,7 +66,63 @@
                 </div>
             </brick-card>
             <brick-card id="purchases">
-                <h1>Purchases</h1>
+                <div>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr data-ng-repeat="purchase in purchases">
+                                <td>
+                                    <form data-ng-submit="removePurchase($index)">
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-minus"></i></button>
+                                        {{purchase.name}}
+                                    </form>
+                                    <br/>
+                                    <div data-ng-repeat="payer in purchase.payers">
+                                        <div class="col-xs-7">
+                                            <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
+                                                </div>
+                                                <select class="form-control input-sm">
+                                                    <option data-ng-repeat="people in peoples" value="$index" data-ng-selected="{{$index == payer.people}}">{{people.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5 text-right">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control input-sm" placeholder="Paid" value="{{payer.price}}" />
+                                                <div class="input-group-addon">
+                                                    <span><i class="fa fa-eur"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <form class="input-group" data-ng-submit="addPayer($index, purchase._newPeopleIndex)">
+                                            <div class="input-group-btn">
+                                                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            <select id="peopleindex" name="peopleindex" class="form-control input-sm" data-ng-model="purchase._newPeopleIndex">
+                                                <option data-ng-repeat="people in peoples" value="{{$index}}" data-ng-selected="{{$index == 0}}">{{people.name}}</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form data-ng-submit="addPurchase()">
+                                        <div class="input-group">
+                                            <div class="input-group-btn">
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control" data-ng-model="purchases._newPurchaseName" placeholder="Put a new purchase here" />
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </brick-card>
             <brick-card id="share-it">
                 <h1>Share it!</h1>
