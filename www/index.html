@@ -78,18 +78,20 @@
                                     <br/>
                                     <div data-ng-repeat="payer in purchase.payers">
                                         <div class="col-xs-7">
+                                                <form data-ng-submit="removePayer($parent.$index, $index)">
                                             <div class="input-group">
-                                                <div class="input-group-btn">
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
-                                                </div>
+                                                    <div class="input-group-btn">
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
+                                                    </div>
                                                 <select class="form-control input-sm">
                                                     <option data-ng-repeat="people in peoples" value="$index" data-ng-selected="{{$index == payer.people}}">{{people.name}}</option>
                                                 </select>
                                             </div>
+                                                </form>
                                         </div>
                                         <div class="col-xs-5 text-right">
                                             <div class="input-group">
-                                                <input type="text" class="form-control input-sm" placeholder="Paid" value="{{payer.price}}" />
+                                                <input type="text" class="form-control input-sm" placeholder="Paid" data-ng-model="payer.price" />
                                                 <div class="input-group-addon">
                                                     <span><i class="fa fa-eur"></i></span>
                                                 </div>
@@ -97,14 +99,20 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
-                                        <form class="input-group" data-ng-submit="addPayer($index, purchase._newPeopleIndex)">
+                                        <form class="input-group" data-ng-submit="addPayer($index)">
                                             <div class="input-group-btn">
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
                                             </div>
-                                            <select id="peopleindex" name="peopleindex" class="form-control input-sm" data-ng-model="purchase._newPeopleIndex">
+                                            <select id="peopleindex" name="peopleindex" class="form-control input-sm" data-ng-model="purchase.payers._newPayerIndex">
                                                 <option data-ng-repeat="people in peoples" value="{{$index}}" data-ng-selected="{{$index == 0}}">{{people.name}}</option>
                                             </select>
                                         </form>
+                                    </div>
+                                    <div class="col-xs-5 text-right">
+                                        <p>
+                                            Total: {{pricePurchase($index)}}
+                                            <i class="fa fa-eur"></i>
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
